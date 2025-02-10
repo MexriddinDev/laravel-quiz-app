@@ -1,6 +1,6 @@
-<x-header></x-header>
+<x-main.header></x-main.header>
 <body class="bg-gradient-to-b from-gray-50 to-gray-100">
-<x-navbar><</x-navbar>
+<x-main.navbar><</x-main.navbar>
 
 
 
@@ -148,6 +148,6 @@
     </div>
 </main>
 
-<x-footer>
+<x-main.footer>
 
-</x-footer>
+</x-main.footer>

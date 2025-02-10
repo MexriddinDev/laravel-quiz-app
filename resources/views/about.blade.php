@@ -1,8 +1,8 @@
-<x-header></x-header>
+<x-main.header></x-main.header>
 <body class="bg-gray-50">
 <!-- Navigation -->
 
-<x-navbar></x-navbar>
+<x-main.navbar></x-main.navbar>
 
 <!-- Hero Section -->
 <div class="bg-indigo-600 text-white py-20">
@@ -154,4 +154,4 @@
         mobileMenu.classList.toggle('hidden');
     });
 </script>
-<x-footer></x-footer>
+<x-main.footer></x-main.footer>

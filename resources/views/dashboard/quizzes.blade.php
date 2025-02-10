@@ -1,4 +1,4 @@
-<x-header></x-header>
+<x-dashboard.header></x-dashboard.header>
 <body class="bg-gray-100">
 <div class="flex min-h-screen">
     <!-- Sidebar -->

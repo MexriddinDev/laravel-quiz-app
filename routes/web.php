@@ -12,7 +12,7 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/take-quiz',[QuizController::class, 'takeQuiz'])->middleware('auth')->name('take-quiz');
-Route::get('/dashboard', [DashboardController::class, 'home'])->name('home');
+Route::get('/dashboard', [DashboardController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard/create-quiz', [DashboardController::class, 'createQuiz'])->name('create-quiz');
 Route::get('/dashboard/quizzes', [DashboardController::class, 'quizzes'])->name('quizzes');
 Route::get('/dashboard/statistics', [DashboardController::class, 'statistics'])->name('statistics');

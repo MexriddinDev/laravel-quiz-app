@@ -1,4 +1,4 @@
-<x-header></x-header>
+<x-dashboard.header></x-dashboard.header>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body class="bg-gray-100">
 <div class="min-h-screen flex">
