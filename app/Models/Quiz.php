@@ -13,4 +13,10 @@ class Quiz extends Model
         'description',
         'time_limit',
     ];
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+
+    }
 }

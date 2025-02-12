@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class QuizController extends Controller
 {
@@ -12,8 +13,11 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.quizzes', [
+            'quizzes' => Quiz::withCount('questions')->get()
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -39,9 +43,23 @@ class QuizController extends Controller
             'user_id'=>auth()->id(),
             'title'=>$validator['title'],
             'description'=>$validator['description'],
-            'timeLimit'=>$validator['timeLimit'],
-
+            'time_limit'=>$validator['timeLimit'],
+            'slug'=>Str::slug(strtotime('now') . '/' . $request['title']),
         ]);
+        foreach ($validator['questions'] as $question) {
+            $questionItem=$quiz->questions()->create([
+                'name'=>$question['quiz'],
+            ]);
+            foreach ($question['options'] as $optionKey=> $option) {
+                $questionItem->options()->create([
+                    'name'=>$option,
+                    'is_correct'=>$question['correct']==$optionKey ? 1 : 0,
+
+                ]);
+            }
+        }
+        return to_route('quizzes');
+
     }
 
     /**
@@ -55,9 +73,11 @@ class QuizController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Quiz $quiz)
     {
-        //
+        return view('dashboard.edit-quiz', [
+            'quiz' => $quiz,
+        ]);
     }
 
     /**
@@ -65,14 +85,17 @@ class QuizController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Quiz $quiz)
     {
-        //
+
+
+
+
     }
 }
