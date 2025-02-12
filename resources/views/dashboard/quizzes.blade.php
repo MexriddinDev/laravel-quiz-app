@@ -77,14 +77,18 @@
                             <span class="text-sm text-gray-500">75% Completion Rate</span>
                         </div>
                         <div class="flex justify-between">
-                            <button class="text-indigo-600 hover:text-indigo-800" >Edit</button>
+                            <a href="{{ route('edit-quiz', ['quiz' => $quiz->id]) }}" class="text-indigo-600 hover:text-indigo-800">Edit</a>
                             <button class="text-green-600 hover:text-green-800">View Results</button>
                             <button
                                 class="text-green-600 hover:bg-green-600 hover:text-white px-3 py-1 rounded transition"
                                 onclick="share('{{$quiz->slug}}')"
                             >Share
                             </button>
-                            <button class="text-red-600 hover:text-red-800">Delete</button>
+                            <form action="{{ route('delete-quiz', ['quiz'=>$quiz->id]) }}" method="GET" onsubmit="return confirm('Haqiqatan ham o‘chirmoqchimisiz?');">
+                                @csrf
+                                <button type="submit" class="text-red-600 hover:text-red-800">Delete</button>
+                            </form>
+
                         </div>
                     </div>
 
@@ -97,16 +101,38 @@
         </main>
     </div>
     <script>
-        async function share(slug){
-            try{
-                slug='{{env('APP_URL')}}' + '/take-quiz/' + slug;
-                await navigator.clipboard.writeText(slug);
-                alert('Content copied to clipboard');
-            }catch (err){
-                console.error('Failed to copy', err);
+        async function share(slug) {
+            try {
+                let shareUrl = "{{ config('app.url') }}" + '/take-quiz/' + slug;
+                await navigator.clipboard.writeText(shareUrl);
+
+                let toast = document.createElement("div");
+                toast.className = "toast";
+                toast.innerText = "✅ Havola nusxalandi!";
+                document.body.appendChild(toast);
+
+                setTimeout(() => toast.remove(), 3000);
+            } catch (err) {
+                console.error("Failed to copy:", err);
             }
         }
     </script>
+
+    <style>
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+            z-index: 1000;
+        }
+    </style>
+
 </div>
 </body>
 </html>

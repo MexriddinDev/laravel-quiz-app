@@ -83,8 +83,43 @@ class QuizController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Quiz $quiz)
     {
+        $validator=$request->validate([
+            'title'=>'required|string|max:255',
+            'description'=>'required|string',
+            'timeLimit'=>'required|integer',
+            'questions'=>'required|array',
+
+        ]);
+        $quiz->title=$request['title'];
+        $quiz->description=$request['description'];
+        $quiz->time_limit=$request['timeLimit'];
+        $quiz->slug=Str::slug(strtotime('now') . '/' . $request['title']);
+
+//        $quiz->update([
+//            'title'=>$request['title'],
+//            'description'=>$request['description'],
+//            'time_limit'=>$request['timeLimit'],
+//            'slug'=>Str::slug(strtotime('now') . '/' . $request['title']),
+//        ]);
+        $quiz->save();
+        $quiz->questions()->delete();
+        foreach ($validator['questions'] as $question) {
+            $questionItem=$quiz->questions()->create([
+                'name'=>$question['quiz'],
+
+            ]);
+            foreach ($question['options'] as $optionKey=> $option) {
+                $questionItem->options()->create([
+                    'name'=>$option,
+                    'is_correct'=>$question['correct']==$optionKey ? 1 : 0,
+
+                ]);
+
+            }
+        }
+        return to_route('quizzes')->with('success', 'Quiz updated successfully');
 
     }
 
@@ -93,6 +128,9 @@ class QuizController extends Controller
      */
     public function destroy(Quiz $quiz)
     {
+        $quiz->delete();
+        return to_route('quizzes')->with('success', 'Quiz deleted successfully');
+
 
 
 
