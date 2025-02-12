@@ -17,7 +17,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/create-quiz', [QuizController::class, 'create'])->name('create-quiz');
     Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes');
     Route::get('/quizzes/{quiz}', [QuizController::class, 'edit'])->name('edit-quiz');
-    Route::get('quizzes/{quiz}/delete', [QuizController::class, 'destroy'])->name('delete-quiz');
+    Route::post('quizzes/{quiz}/delete', [QuizController::class, 'destroy'])->name('delete-quiz');
     Route::post('/quizzes/{quiz}/update', [QuizController::class, 'update'])->name('update-quiz');
     Route::get('/quizzes/{quiz}/delete', [QuizController::class, 'destroy'])->name('delete-quiz');
     Route::get('/statistics', [DashboardController::class, 'statistics'])->name('statistics');
