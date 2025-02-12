@@ -1,4 +1,4 @@
-<x-header></x-header>
+<x-main.header></x-main.header>
 <body class="flex flex-col min-h-screen bg-gray-100">
 <!-- Navigation -->
 <nav class="bg-white shadow-lg">
@@ -284,5 +284,5 @@
         });
     });
 </script>
-<x-footer></x-footer>
+<x-main.footer></x-main.footer>
 
