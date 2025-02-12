@@ -132,8 +132,11 @@ class QuizController extends Controller
         return to_route('quizzes')->with('success', 'Quiz deleted successfully');
 
 
-
-
-
     }
+    public function takeQuiz($slug)
+    {
+        $quiz = Quiz::where('slug', $slug)->firstOrFail();
+        return view('quiz.take-quiz', compact('quiz'));
+    }
+
 }

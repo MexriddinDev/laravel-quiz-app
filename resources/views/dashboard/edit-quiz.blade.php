@@ -37,7 +37,7 @@
                                     <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                                     <textarea id="description" name="description" rows="3" placeholder="Description" required
 
-                                              class="w-full px-4 py-2 border rounded-lg mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"> {{ $quiz->description }}</textarea>
+                                              class="w-full px-4 py-2 border rounded-lg mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">{{ $quiz->description }}</textarea>
                                 </div>
                                 <div>
                                     <label for="timeLimit" class="block text-sm font-medium text-gray-700">Time Limit (minutes)</label>

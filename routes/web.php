@@ -11,7 +11,7 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/take-quiz',[QuizController::class, 'takeQuiz'])->middleware('auth')->name('take-quiz');
+Route::get('/take-quiz/{slug}',[QuizController::class, 'takeQuiz'])->middleware('auth')->name('take-quiz');
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/create-quiz', [QuizController::class, 'create'])->name('create-quiz');
@@ -21,6 +21,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('/quizzes/{quiz}/update', [QuizController::class, 'update'])->name('update-quiz');
     Route::get('/quizzes/{quiz}/delete', [QuizController::class, 'destroy'])->name('delete-quiz');
     Route::get('/statistics', [DashboardController::class, 'statistics'])->name('statistics');
+
 
 
     Route::post('/create-quiz', [QuizController::class, 'store'])->name('store-quiz');
