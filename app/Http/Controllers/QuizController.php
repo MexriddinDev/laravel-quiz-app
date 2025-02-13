@@ -14,7 +14,7 @@ class QuizController extends Controller
     public function index()
     {
         return view('dashboard.quizzes', [
-            'quizzes' => Quiz::withCount('questions')->get()
+            'quizzes' => Quiz::withCount('questions')->orderBy('id','desc')->get()
         ]);
     }
 
