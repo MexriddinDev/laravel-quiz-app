@@ -103,7 +103,7 @@
     <script>
         async function share(slug) {
             try {
-                let shareUrl = "{{ config('app.url') }}" + '/take-quiz/' + slug;
+                let shareUrl = "{{ url('take-quiz/') }}/" + slug;
                 await navigator.clipboard.writeText(shareUrl);
 
                 let toast = document.createElement("div");

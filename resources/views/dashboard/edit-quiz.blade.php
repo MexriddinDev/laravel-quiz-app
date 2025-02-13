@@ -85,8 +85,8 @@
                                                 </div>
                                                 <!-- Option 1 -->
                                                 <div class="flex items-center gap-4">
-                                                    <input {{$option->is_correct ? 'checked' : '' }} type="radio" name="questions[0][correct]" value="0" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                                                    <input type="text" name="questions[0][options][]" placeholder="Option 1" required
+                                                    <input {{$option->is_correct ? 'checked' : '' }} type="radio" name="questions[{{$optionKey}}][correct]" value="{{$optionKey}}" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                                    <input type="text" name="questions[{{$optionKey}}][options][]" placeholder="Option 1" required
                                                            value="{{ $option['name']}}"
                                                            class="w-full px-4 py-2 border rounded-lg block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                                     <button type="button" class="removeOptionBtn px-2 py-1 text-red-600 hover:text-red-800">×</button>

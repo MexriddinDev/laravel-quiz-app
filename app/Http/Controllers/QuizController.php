@@ -133,10 +133,12 @@ class QuizController extends Controller
 
 
     }
-    public function takeQuiz($slug)
+    public function takeQuiz(Quiz $quiz)
     {
-        $quiz = Quiz::where('slug', $slug)->firstOrFail();
-        return view('quiz.take-quiz', compact('quiz'));
+       return view('quiz.take-quiz', [
+           'quiz'=> $quiz ->load('questions.options')
+
+       ]);
     }
 
 }
