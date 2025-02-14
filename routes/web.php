@@ -11,6 +11,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+//Route::get('/quizzes', [QuizController::class, 'index'])->name('pagination');
+
 Route::get('/take-quiz/{slug}',[QuizController::class, 'takeQuiz'])->middleware('auth', 'verified')->name('take-quiz');
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');

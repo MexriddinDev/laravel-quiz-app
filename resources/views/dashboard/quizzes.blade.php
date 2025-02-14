@@ -93,12 +93,23 @@
                     </div>
 
                 @endforeach
-                <!-- Quiz Card 1 -->
+
+
+
+
+
+                    <!-- Quiz Card 1 -->
 
 
 
             </div>
+
         </main>
+        <div class="mt-4 flex justify-center">
+            {{ $quizzes->onEachSide(1)->links('vendor.pagination.simple-tailwind') }}
+        </div>
+
+
     </div>
     <script>
         async function share(slug) {

@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class QuizController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $quiz= Quiz::withCount('questions')->where('user_id', auth()->user()->id)->orderBy('id','desc')->paginate(3);
         return view('dashboard.quizzes', [
-            'quizzes' => Quiz::withCount('questions')->orderBy('id','desc')->get()
+            'quizzes' =>$quiz,
+
         ]);
     }
 
