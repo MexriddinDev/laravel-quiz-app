@@ -84,7 +84,7 @@
                                 onclick="share('{{$quiz->slug}}')"
                             >Share
                             </button>
-                            <form action="{{ route('delete-quiz', ['quiz'=>$quiz->id]) }}" method="POST" onsubmit="return confirm('Haqiqatan ham o‘chirmoqchimisiz?');">
+                            <form action="{{ route('destroy-quiz', ['quiz'=>$quiz->id]) }}" method="POST" onsubmit="return confirm('Haqiqatan ham o‘chirmoqchimisiz?');">
                                 @csrf
                                 <button type="submit" class="text-red-600 hover:text-red-800">Delete</button>
                             </form>
@@ -105,16 +105,24 @@
             </div>
 
         </main>
-        <div class="mt-4 flex justify-center">
-            {{ $quizzes->onEachSide(1)->links('vendor.pagination.simple-tailwind') }}
+{{--        <div class="mt-4 flex justify-center">--}}
+{{--            {{ $quizzes->onEachSide(1)->links('vendor.pagination.simple-tailwind') }}--}}
+{{--        </div>--}}
+
+        <div class="mt-4 flex flex-col items-center">
+            {{ $quizzes->links('pagination::tailwind') }}
+
         </div>
+
+
+
 
 
     </div>
     <script>
         async function share(slug) {
             try {
-                let shareUrl = "{{ url('take-quiz/') }}/" + slug;
+                let shareUrl = "{{ url('show-quiz/') }}/" + slug;
                 await navigator.clipboard.writeText(shareUrl);
 
                 let toast = document.createElement("div");
